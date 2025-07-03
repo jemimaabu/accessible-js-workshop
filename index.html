@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessible JavaScript Workshop Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A demonstration site for learning JavaScript accessibility - start with screen readers only!">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Black overlay that covers everything visually -->
+  <div class="accessibility-overlay" id="accessibilityOverlay"></div>
+
+  <!-- Menu Bar -->
+  <nav class="menu">
+    <a class="menu-item" href="#">Home</a>
+    <a class="menu-item" href="#about">About</a>
+    <a class="menu-item" href="#main-content">Services</a>
+    <a class="menu-item" href="#contact">Contact</a>
+    <a class="menu-item" href="#resources">Resources</a>
+    <a class="menu-item" href="#footer">Support</a>
+    <a class="menu-item" target="_blank" href="https://www.jemimaabu.com">Blog</a>
+    <div class="dropdown">
+      <div class="dropdown-toggle" onclick="toggleDropdown(event)">More Options</div>
+      <div class="dropdown-content">
+        <a class="menu-item" href="#">Privacy Policy</a>
+        <a class="menu-item" href="#">Terms of Service</a>
+        <a class="menu-item" href="#">Help Center</a>
+        <a class="menu-item" href="#">Documentation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Welcome to the Accessible JavaScript Workshop!</h1>
+    <p>This is a hands-on workshop where you'll learn to identify and fix common accessibility issues in JavaScript-powered websites.</p>
+    <p><strong>Challenge:</strong> This website is currently covered by a black overlay. Your mission is to navigate using only screen readers and keyboard controls to find and activate the "Turn off overlay" button. Along the way, you'll discover various accessibility barriers that need to be addressed.</p>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="main-content" id="main-content">
+    <h2>Workshop Instructions</h2>
+    <p>Right now, you can only interact with this site using assistive technologies like screen readers. This simulates the experience of users who rely on these tools daily.</p>
+    
+    <h3>Your Goal</h3>
+    <p>Navigate through this page to find the "Turn off overlay" button. When you click it, a confirmation modal will appear. You'll need to navigate to that modal and confirm your choice to reveal the visual interface.</p>
+    
+    <h3>What You'll Learn</h3>
+    <ul>
+      <li>Importance of semantic HTML structure</li>
+      <li>Proper keyboard navigation patterns</li>
+      <li>ARIA labels and live regions</li>
+      <li>Focus management in modals</li>
+      <li>Accessible dropdown menus</li>
+      <li>Form accessibility best practices</li>
+    </ul>
+    
+    <button class="turn-off-overlay-btn" onclick="showModal()">Turn off overlay</button>
+    
+    <p><em>Note: As you work through this workshop, you'll be adding proper accessibility features to make this site usable for everyone.</em></p>
+  </main>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2>About This Workshop</h2>
+    <p>Modern JavaScript has revolutionized web development, enabling dynamic, interactive experiences. However, with great power comes great responsibility - ensuring these experiences remain accessible to all users.</p>
+    <p>This workshop uses a "reverse engineering" approach where you start with an inaccessible site and progressively fix issues until it becomes fully accessible.</p>
+    <p>You'll work with real-world scenarios including dropdown navigation, modal dialogs, form interactions, and dynamic content updates.</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact" id="contact">
+    <h2>Contact Form (not active)</h2>
+    <form>
+      <input type="text" placeholder="Your Name" id="name">
+      <input type="email" placeholder="Your Email" id="email">
+      <input type="text" placeholder="Workshop Section" id="section">
+      <textarea placeholder="Your Question or Issue" id="issue"></textarea>
+      <button type="button">Send Help Request</button>
+    </form>
+  </section>
+
+  <!-- Additional Content to Navigate Through -->
+  <section class="additional-content" id="resources">
+    <h2>Workshop Resources</h2>
+    <p>Here are some links to helpful resources (and more content to tab through!)</p>
+    <ul class="resources-links">
+      <li><a href="https://www.w3.org/TR/WCAG21/">WCAG 2.1 Guidelines</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices</a></li>
+      <li><a href="https://www.w3.org/WAI/test-evaluate/">Screen Reader Testing Guide</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/">Keyboard Navigation Patterns</a></li>
+      <li><a href="https://webaim.org/resources/contrastchecker/">Color Contrast Checker</a></li>
+      <li><a href="https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en">European Accessibility Act</a></li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#main-content">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#footer">Support</a></li>
+      <li><a target="_blank" href="https://www.jemimaabu.com">Blog</a></li>
+    </ul>
+
+    <p>Built by <a target="_blank" href="https://www.jemimaabu.com">Jemima Abu &hearts;</a></p>
+  </footer>
+
+  <!-- Modal Dialog -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <h3>Confirm Action</h3>
+      <p>Are you sure you want to turn off the accessibility overlay? This will reveal the visual interface.</p>
+      
+      <div class="timeout-warning" id="timeoutWarning">
+        <p>You haven't interacted with this modal in a while. This modal will disappear in <span class="countdown" id="countdown">5</span> seconds if you don't click here.</p>
+        <button onclick="resetTimeout()">I'm still here!</button>
+      </div>
+      
+      <div class="modal-buttons">
+        <button class="modal-btn cancel" onclick="hideModal()">Close</button>
+        <button class="modal-btn confirm" onclick="confirmAction()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/accessibility.js"></script>
+  <script src="./js/timer.js"></script>
+  <script src="./js/modal.js"></script>
+  <script src="./js/menu.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+</html>
