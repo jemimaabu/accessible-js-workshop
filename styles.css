@@ -132,11 +132,6 @@ h1, h2 {
   background-color: light-dark(#004085, #1557b0);
 }
 
-.contact button:focus {
-  outline: 3px solid light-dark(#80bdff, #66b3ff);
-  outline-offset: 2px;
-}
-
 /* Accessibility overlay */
 .accessibility-overlay {
   position: fixed;
