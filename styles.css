@@ -46,6 +46,15 @@ a:hover {
   transition: background-color 0.2s ease;
 }
 
+.dropdown-toggle {
+  appearance: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .menu-item:hover, .dropdown-toggle:hover {
   background-color: light-dark(rgba(255,255,255,0.1), rgba(255,255,255,0.1));
 }
