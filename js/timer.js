@@ -48,7 +48,7 @@ function resetTimeout() {
   
   announceToScreenReader('Timeout reset. You can continue using the modal.');
   
-  startTimeoutWarning();
+  startTimeoutWarning(inactiveTime);
 }
 
 function clearTimeoutWarnings() {

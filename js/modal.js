@@ -2,7 +2,7 @@
 
 function showModal() {
   const modal = document.getElementById('confirmModal');
-  modal.classList.add('show');
+  modal.showModal();
 
   const inactiveTime = 2500; // 2.5 seconds
   startTimeoutWarning(inactiveTime);
@@ -10,7 +10,7 @@ function showModal() {
 
 function hideModal() {
   const modal = document.getElementById('confirmModal');
-  modal.classList.remove('show');
+  modal.close();
   clearTimeoutWarnings();
 }
 
@@ -21,7 +21,7 @@ function confirmAction() {
   localStorage.setItem(OVERLAY_REMOVED_KEY, 'true');
   
   const modal = document.getElementById('confirmModal');
-  modal.classList.remove('show');
+  modal.close();
   clearTimeoutWarnings();
   
   announceToScreenReader('Overlay removed! The visual interface is now available.');
